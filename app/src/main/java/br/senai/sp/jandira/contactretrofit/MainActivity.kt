@@ -10,6 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import br.senai.sp.jandira.contactretrofit.api.ContactCall
+import br.senai.sp.jandira.contactretrofit.api.RetrofitApi
 import br.senai.sp.jandira.contactretrofit.ui.theme.ContactRetrofitTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,10 +33,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
+
+    val retrofit = RetrofitApi.getRetrofit()
+    val contactsCall = retrofit.create(ContactCall::class.java)
+    val call = contactsCall.getAll()
+
     Text(text = "Hello $name!")
 }
 
-@Preview(showBackground = true)
+
 @Composable
 fun DefaultPreview() {
     ContactRetrofitTheme {
